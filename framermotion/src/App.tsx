@@ -1,5 +1,11 @@
-import { motion, useMotionValue, useTransform, Variants } from "framer-motion";
-import React, { useRef } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useTransform,
+  Variants,
+} from "framer-motion";
+import React, { useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -126,6 +132,81 @@ const Svg = styled.svg`
   }
 `;
 
+const PresenceBox = styled(motion.div)`
+  width: 200px;
+  height: 200px;
+  background-color: skyblue;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+
+const Wrapper = styled(motion.div)`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const LayoutBox = styled(motion.div)`
+  width: 300px;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+
+const LayoutCircle = styled(motion.div)`
+  background-color: #00a5ff;
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 50vw;
+  gap: 10px;
+  div:first-child,
+  div:last-child {
+    grid-column: span 2;
+  }
+`;
+
+const GridBox = styled(motion.div)`
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 40px;
+  height: 200px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+
+const Overlay = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const GridWrap = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const overlay: Variants = {
+  hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
+  visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+  exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
+};
+
 const myVariants: Variants = {
   start: { scale: 0 },
   end: { scale: 1, rotateZ: 360, transition: { type: "spring", delay: 0.5 } },
@@ -174,8 +255,52 @@ const svgVariants: Variants = {
   },
 };
 
+const presenceBoxVariants: Variants = {
+  entry: (back: boolean) => {
+    return {
+      x: back ? -500 : 500,
+      opacity: 0,
+      scale: 0,
+    };
+  },
+  center: (back: boolean) => {
+    return {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1,
+      },
+    };
+  },
+  exit: (back: boolean) => {
+    return {
+      x: back ? 500 : -500,
+      opacity: 0,
+      scale: 0,
+      transition: { duration: 1 },
+    };
+  },
+};
+
 function App() {
   const biggerBoxRef = useRef<HTMLDivElement>(null);
+
+  const [id, setId] = useState<null | string>(null);
+
+  const [clicked, setClicked] = useState(false);
+  const toggleClicked = () => setClicked((prev) => !prev);
+
+  const [visible, setVisible] = useState(1);
+  const [back, setBack] = useState(false);
+  const nextButton = () => {
+    setBack(false);
+    setVisible((prev) => (prev === 10 ? 10 : prev + 1));
+  };
+  const prevButton = () => {
+    setBack(true);
+    setVisible((prev) => (prev === 1 ? 1 : prev - 1));
+  };
 
   const x = useMotionValue(0);
   const rotateHook = useTransform(x, [-800, 800], [-360, 360]);
@@ -225,6 +350,58 @@ function App() {
             d="M224 373.12c-25.24-31.67-40.08-59.43-45-83.18-22.55-88 112.61-88 90.06 0-5.45 24.25-20.29 52-45 83.18zm138.15 73.23c-42.06 18.31-83.67-10.88-119.3-50.47 103.9-130.07 46.11-200-18.85-200-54.92 0-85.16 46.51-73.28 100.5 6.93 29.19 25.23 62.39 54.43 99.5-32.53 36.05-60.55 52.69-85.15 54.92-50 7.43-89.11-41.06-71.3-91.09 15.1-39.16 111.72-231.18 115.87-241.56 15.75-30.07 25.56-57.4 59.38-57.4 32.34 0 43.4 25.94 60.37 59.87 36 70.62 89.35 177.48 114.84 239.09 13.17 33.07-1.37 71.29-37.01 86.64zm47-136.12C280.27 35.93 273.13 32 224 32c-45.52 0-64.87 31.67-84.66 72.79C33.18 317.1 22.89 347.19 22 349.81-3.22 419.14 48.74 480 111.63 480c21.71 0 60.61-6.06 112.37-62.4 58.68 63.78 101.26 62.4 112.37 62.4 62.89.05 114.85-60.86 89.61-130.19.02-3.89-16.82-38.9-16.82-39.58z"
           />
         </Svg>
+        <div>
+          <AnimatePresence exitBeforeEnter custom={back}>
+            <PresenceBox
+              custom={back}
+              variants={presenceBoxVariants}
+              initial="entry"
+              animate="center"
+              exit="exit"
+              key={visible}
+            >
+              {visible}
+            </PresenceBox>
+          </AnimatePresence>
+          <button onClick={nextButton}>next</button>
+          <button onClick={prevButton}>prev</button>
+        </div>
+        <Wrapper onClick={toggleClicked}>
+          <LayoutBox>
+            {!clicked ? (
+              <LayoutCircle layoutId="circle" style={{ borderRadius: 50 }} />
+            ) : null}
+          </LayoutBox>
+          <LayoutBox>
+            {clicked ? (
+              <LayoutCircle
+                layoutId="circle"
+                style={{ borderRadius: 0, scale: 2 }}
+              />
+            ) : null}
+          </LayoutBox>
+        </Wrapper>
+
+        <GridWrap>
+          <Grid>
+            {["1", "2", "3", "4"].map((n) => (
+              <GridBox onClick={() => setId(n)} key={n} layoutId={n} />
+            ))}
+          </Grid>
+          <AnimatePresence>
+            {id ? (
+              <Overlay
+                variants={overlay}
+                onClick={() => setId(null)}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <GridBox layoutId={id} style={{ width: 400, height: 200 }} />
+              </Overlay>
+            ) : null}
+          </AnimatePresence>
+        </GridWrap>
       </Container>
     </>
   );
