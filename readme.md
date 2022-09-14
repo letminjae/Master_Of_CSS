@@ -40,12 +40,12 @@
             - *좌표* : top left right bottom
             - *텍스트* : color font-size font-weight letter-spacing line-height text-indent text-shadow vertical-align word-spacing
             - *기타 속성* : opacity outline-color outline-offset outline-width visibility z-index
-        - ❗**중요**❗ 요소의 속성 값이 변화한다면 속성 값의 변화에 영향을 받는 모든 요소의 기하값을 다시 계산하여 layout 작업을 수행한다. 이것은 브라우저의 성능저하의 요인이 될 수 있기 때문에 layout에 영향을 주는 transition 효과는 피하도록 해야한다.
-        - layout에 영향을 주는 속성들
+        - ❗**중요**❗ 요소의 속성 값이 변화한다면 `속성 값의 변화에 영향을 받는 모든 요소의 기하값을 다시 계산하여 layout 작업을 수행`한다. 이것은 브라우저의 성능저하의 요인이 될 수 있기 때문에 layout에 영향을 주는 transition 효과는 피하도록 해야한다.
+        - `layout에 영향을 주는 속성들`
             - width height padding margin border display position float overflow top left right bottom font-size font-family font-weight text-align vertical-align line-height clear white-space
-    - opacity : 불투명 이라는 뜻. 불투명도가 0이면 아예 보이지 않는다. 1이면 정상적으로 잘보인다.
+    - opacity : `불투명` 이라는 뜻. 불투명도가 0이면 아예 보이지 않는다. 1이면 정상적으로 잘보인다.
         - 보통 가상클래스에 :hover를 사용하여 다른 불투명도를 적용해 사라졌다 나타나는 효과, 나타났다 사라지는 효과를 사용할수 있다.
-    - scale : transform의 속성중 하나. transform은 요소에 크기조절, 기울이기, 이동효과를 부여하는 속성인데 여기서 scale은 확대와 축소를 담당하는 속성이다.
+    - scale : transform의 속성중 하나. transform은 요소에 크기조절, 기울이기, 이동효과를 부여하는 속성인데 여기서 `scale은 확대와 축소를 담당하는 속성`이다.
         - transform : scale(2); => 가로세로 모두 2배 확대
         - transform : scaleX(2); => 가로로만 2배 확대
         - transform : scaleY(2); => 세로로만 2배 확대
