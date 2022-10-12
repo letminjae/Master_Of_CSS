@@ -249,33 +249,36 @@ const variants = {
   - 새 컴포넌트는 이전 컴포넌트의 애니메이션 값도 초기 상태로 상속. 따라서 시각적으로 하나의 연속 컴포넌트로 처리됨.
 
 
-## Login Form
-
+## **Login Form**
+<img src="https://user-images.githubusercontent.com/96935557/195271397-114643ea-8541-4a55-866f-01912e0dcc3e.gif">
 - 
 
-## Swiper Button
-
-- 
-## Animated Circular Progress
-
-- 
-## Responsive Website Design (Cocacola)
-
+## **Swiper Button**
+<img src="https://user-images.githubusercontent.com/96935557/195271101-c7dd1d64-3700-43d4-8c14-2bc2444a2b78.gif">
 - 
 
-## Parallax Scroling Website
-
+## **Animated Circular Progress**
+<img src="https://user-images.githubusercontent.com/96935557/195271441-af1461fe-4ac5-4201-956c-c8a8ffad35ec.gif">
 - 
 
-## Animated Navigation Bar
-
+## **Responsive Website Design (Cocacola)**
+<img src="https://user-images.githubusercontent.com/96935557/195274894-b645bdc0-6200-44e5-b9e3-75ffecc4cbfb.gif">
 - 
 
-## Animated Search Box
-
+## **Parallax Scroling Website**
+<img src="https://user-images.githubusercontent.com/96935557/195273276-b7e3bad9-49f9-4a77-88bf-d6a99e6549c4.gif">
 - 
 
-## Responsive Menu Bar
+## **Animated Navigation Bar**
+<img src="https://user-images.githubusercontent.com/96935557/195271101-c7dd1d64-3700-43d4-8c14-2bc2444a2b78.gif">
+- 
+
+## **Animated Search Box**
+<img src="https://user-images.githubusercontent.com/96935557/195271358-10e525de-0955-4fda-a6d8-59a298cee7bf.gif">
+- 
+
+## **Responsive Menu Bar**
+<img src="https://user-images.githubusercontent.com/96935557/195271464-15540007-1216-44e8-960a-dc7b639d84b2.gif">
 
 - 
 

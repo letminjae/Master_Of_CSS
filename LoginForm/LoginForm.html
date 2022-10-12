@@ -14,12 +14,12 @@
     <div class="form">
       <h2>Sign In</h2>
       <div class="inputBox">
-        <input type="text" required="required" />
+        <input id="id" type="text" required="required" value="hello" />
         <span>Username</span>
         <i></i>
       </div>
       <div class="inputBox">
-        <input type="password" required="required" />
+        <input id="password" type="password" required="required" />
         <span>Password</span>
         <i></i>
       </div>
@@ -30,6 +30,18 @@
       <input type="submit" value="Login" />
     </div>
   </div>
+
+  <script>
+    const $id = document.querySelector('#id');
+    const $password = document.querySelector('#password');
+    $id.addEventListener("input", (e) => {
+      console.log(e.target.value)
+      e.target.value;
+    });
+    $password.addEventListener("input", (e) => {
+      e.target.value;
+    });
+  </script>
 </body>
 
 </html>
