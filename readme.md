@@ -251,34 +251,153 @@ const variants = {
 
 ## **Login Form**
 <img src="https://user-images.githubusercontent.com/96935557/195271397-114643ea-8541-4a55-866f-01912e0dcc3e.gif">
-- 
+
+- `가상요소 before과 after`
+  - `가상클래스?` - :before, :after, :first-child ... class를 지정하지 않아도 클래스를 선택하여 제어할 수 있다. 굳이 class를 만들지 않아도 CSS 만으로 클래스를 만들어 조종할 수 있는 것이다.
+  - `대표적 가상클래스의 종류`
+    - :hover : 마우스를 요소위에 놓을 때 요소 선택
+    - :active : 사용자가 활성화한 요소(버튼 등)를 나타냄. 마우스를 사용하는 경우, "활성"이란 보통 마우스 버튼을 누르는 순간부터 떼는 시점까지를 의미한다.
+    - :focus: 양식의 입력 칸 등 포커스를 받은 요소를 나타낸다. 보통 사용자가 요소를 클릭 또는 탭하거나, 키보드 Tab 키로 선택했을 때 발동한다.
+    - :valid: <input> 요소의 값이 유효한 경우에만 요소선택 및 스타일 지정
+    - :first-child, :last-child, nth-child(N): 요소의 첫번째, 끝, N번째 요소를 나타냄.
+    - :before, :after 가상엘리먼트는 content 속성이 있을 경우에만 출력
+
+  - `가상요소?` : 요소가 없어도 있는 것과 같이 제어해줄 수 있다. 굳이 HTML 태그를 작성하지 않아도 CSS 만으로 가상으로 덩어리를 만들수 있는것이다.
+  - `대표적 가상요소의 종류`
+    - ::before : 요소의 콘텐츠 시작부분에서 `생성된 콘텐츠를 추가한다.` 실제 내용 바로 앞에서 생성되는 자식요소
+    - ::after : 요소의 콘텐츠 끝부분에서 `생성된 콘텐츠를 추가한다.` 실제 내용 바로 뒤에서 생성되는 자식요소​
+    - ::placeholder : input placeholder 요소에 스타일을 적용한다.
+    - ::selection : 요소의 텍스트에서 사용자에 의해 선택된 영역의 속성을 변경한다.
+    - ::first-letter : 요소의 첫 번째 글자에 스타일을 적용한다.
+  - 가상요소 사용시 `content에 ""`를 사용해준다.
+
+- inset : 태그 요소의 위치를 결정하는 top, right, bottom, left의 축약 스타일 속성.
+  - 즉 상하좌우를 각각의 css 속성으로 설정하지 않고 inset 하나만 사용하는 것이 가능
+  ```
+  inset : top right bottom left;
+  ```
+
+- input:valid ~ span, input:focus ~ span : **선택자에 대해**
+  - `인접형제 선택자` `"+"` : 특정 태그의 `다음 형제 요소`를 선택함
+  ```js
+  //style.css
+  h1 + p { color: yellow };
+
+  //index.html
+  <h1>h1</h1>
+  <p>hello</p> // 적용대상
+  <p>hello</p> 
+  <p>hello</p> 
+  ```
+  - `형제 선택자` `"~"` : 특정태그에 `다음에 오는 모든 형제들`을 선택함.
+  ```js
+  //style.css
+  h1 ~ p { color: yellow };
+
+  //index.html
+  <h1>h1</h1>
+  <p>hello</p> // 적용대상
+  <p>hello</p> // 적용대상
+  <p>hello</p> // 적용대상
+  ```
+
+  - `그룹 선택자` `","` : 2개 이상의 선택자를 묶을 때 사용.
+  ```js
+  //style.css
+  .box p,
+  .box h2, 
+  .box a {
+    background-color:yellow;
+  }
+
+  //index.html
+  <div class="box">
+    <p>1</p> //적용대상
+    <h2>2</h2> //적용대상
+    <a href="#">3</a> //적용대상
+  </div>
+  ```
+
+- i 태그 : 글자를 기울여서 표시하는 태그로, italic의 약자
+
+- [type='submit'] : 속성선택자. form 관련 대상을 선택 시 주로 사용.
+  - 선택자[속성=값]  속성의 값이 모두 일치할 때 선택.
+  - 선택자[속성^=값] 속성의 값이 이것으로 시작할 때 선택.
+  - 선택자[속성$=값] 속성의 값이 이것으로 끝날 때 선택.
+  - 선택자[속성*=값] 속성의 값에 이것이 포함되었을 때 선택.
 
 ## **Swiper Button**
-<img src="https://user-images.githubusercontent.com/96935557/195271101-c7dd1d64-3700-43d4-8c14-2bc2444a2b78.gif">
-- 
+<img src="https://user-images.githubusercontent.com/96935557/195275349-a73f3e8e-30bb-4e97-8cce-d9d56ae0c855.gif">
 
+- skew : 요소를 기울일 때 사용함. skew(x축, y축)으로 표현하나, skewX(), skewY()로도 설정가능.
+- `position : relative와 absolute의 관계`
+  - relative : 요소 자기자신을 기준으로 배치
+  - absolute : 부모(조상) 요소를 기준으로 배치
+  - fixed : 뷰포트 기준으로 배치
+  - sticky : 스크롤 영역 기준으로 배치
+  - 기본적으로 부모 relative를 잡고, 자식을 absolute로 포지션을 잡으면 부모 요소가 자식 요소의 기준점이 되기 때문에 `부모요소의 기준`으로 위치가 결정됨.
+  - absolute의 기준점이 없다면? `뷰포트를 기준`으로 위치가 결정된다.
 ## **Animated Circular Progress**
 <img src="https://user-images.githubusercontent.com/96935557/195271441-af1461fe-4ac5-4201-956c-c8a8ffad35ec.gif">
-- 
+
+- `flex-wrap` : flex 컨테이너에서 flex 아이템의 줄바꿈을 설정하는 방법이다.
+  - wrap: flex 아이템이 Flex 컨테이너의 끝에 닿으면 문자의 표기 방향에 따라 줄 바꿈
+  - nowrap: 줄 바꿈하지 않고 flex 아이템 모두를 한줄로 표시
+  - wrap-reverse: wrap과 같지만, 문자의 표기 방향과는 반대로 배치.
+  - 비슷한 방법으로 `flex-flow` 속성이 있는데, 속성은 flex-direction과 flex-wrap을 합쳐 지정하는 단축 속성이 있다. `초기 값은 row nowrap`
+
+- `svg 태그의 구조`
+  - svg? : Scalable Vector Graphics의 약자로 벡터 기반 그래픽을 XML 형식으로 정의하는 것. svg 그래픽을 담기 위한 요소로 생각하자.
+  - svg 내부에 담을 수 있는 것은 원(circle), 사각형(rect), 다각형(polygon), 라인(line), path(path) 등이 있다.
+  - fill 속성 : 면색을 의미, svg에서 쓰는 color와 같다.
+  - stroke와 stroke-width 속성 : 선색과 선굵기를 조정한다.
+  - fill-opacity, stroke-opacity : 면색의 투명도 설정, 선색의 투명도 설정
+  - rect의 rx, ry : 사각형 svg의 모서리를 둥글게 만드는 속성.
+  - circle의 cx, cy, r : 원 중심의 x좌표와 y좌표를 정의. r 속성은 원의 반지름.
+
+- css의 변수설정법 - `var(--clr)`
+  - 문서 전반적으로 재사용할 임의의 값을 변수에 담아 설정.
+  - 기본적으로 두 개의 붙임표(--)로 시작하는 속성의 이름과 함께, 유효한 CSS 값이라면 아무거나 그 값으로 지정해 선언하면 된다.
 
 ## **Responsive Website Design (Cocacola)**
 <img src="https://user-images.githubusercontent.com/96935557/195274894-b645bdc0-6200-44e5-b9e3-75ffecc4cbfb.gif">
-- 
+
+- section 태그 : 구획 요소. HTML 문서에 포함된 독립적인 섹션(section)을 정의할 때 사용
+- clip-path : 표시되어야 하는 요소의 부분을 설정하는 클리핑 영역을 만들어줌. 영역 내부에 있는 부품은 표시되고 외부에 있는 영역은 숨겨진다.
+```js
+clip-path: circle(70% at right -20%);
+```
+- filter: invert()
+- 반응형 웹 - media 쿼리
 
 ## **Parallax Scroling Website**
 <img src="https://user-images.githubusercontent.com/96935557/195273276-b7e3bad9-49f9-4a77-88bf-d6a99e6549c4.gif">
-- 
+
+- gsap 라이브러리
 
 ## **Animated Navigation Bar**
 <img src="https://user-images.githubusercontent.com/96935557/195271101-c7dd1d64-3700-43d4-8c14-2bc2444a2b78.gif">
-- 
+
+- position: fixed : 뷰포트 기준으로 요소를 배치하는 방법
+- `변수로 transition delay를 주는 방법` : style 태그에 변수를 설정 후 number 값을 주어 calc로 딜레이 초를 지정한다.
+```js
+//style.css
+transition-delay: calc(0.1s * var(--i));
+
+//index.html
+<ul>
+  <li style="--i:0;"><a href="#">Home</a></li>
+  <li style="--i:1;"><a href="#">About</a></li>
+  <li style="--i:2;"><a href="#">Services</a></li>
+  <li style="--i:3;"><a href="#">Work</a></li>
+  <li style="--i:4;"><a href="#">Team</a></li>
+  <li style="--i:5;"><a href="#">Contact</a></li>
+</ul>
+```
+- display: block : div나 p, h1처럼, 전후 줄바꿈이 들어가 다른 엘리먼트들을 다른 줄로 밀어내고 혼자 한 줄을 차지.
 
 ## **Animated Search Box**
 <img src="https://user-images.githubusercontent.com/96935557/195271358-10e525de-0955-4fda-a6d8-59a298cee7bf.gif">
-- 
 
 ## **Responsive Menu Bar**
 <img src="https://user-images.githubusercontent.com/96935557/195271464-15540007-1216-44e8-960a-dc7b639d84b2.gif">
-
-- 
-
