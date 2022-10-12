@@ -367,13 +367,56 @@ const variants = {
 ```js
 clip-path: circle(70% at right -20%);
 ```
-- filter: invert()
-- 반응형 웹 - media 쿼리
+- filter: invert(number) : 입력 이미지의 색상 샘플을 반전시키는 속성.
+```js
+filter: invert(1);
+```
+- **반응형 웹 - media 쿼리**
+  - 해상도, 뷰포트 너비에 따라 웹사이트나 앱의 스타일을 수정해줄 때 사용함.
+  - 조건에는 여러가지가 삽입, 보통 뷰포트 넓이를 통해 반응형 웹을 제작.
+  ```css
+  @media (max-width: 768px) {
+    .desktop {
+      display : none;
+    }
+  }
+  ```
+  - only : 미디어 쿼리를 지원하는 사용자 에이전트만 미디어 쿼리 구문을 해석하라는 명령이며 생략 가능. 오래 된 브라우저가 스타일을 잘못 적용하지 못하도록 방지할 때 유용하다.
+  - and : 논리적으로 ‘AND’ 연산을 수행하여 앞과 뒤의 조건을 모두 만족해야 한다는 것을 의미
+
+  - *Device Size*
+    - Mobile Device : 481px 이상 768px 미만 해상도의 모바일 기기를 위한 코드를 작성.
+    ```css
+    @media (min-width: 481px) and (max-width: 767px) {
+    }
+    ```
+    - Tablet & Desktop Device : 사용자 해상도가 768px 이상일 때 이 코드가 실행됨. 테블릿과 데스크톱의 공통 코드를 작성한다.
+    ```css
+    @media all and (min-width:768px) {
+    }
+    ```
+    - Tablet Device : 사용자 해상도가 768px 이상이고 1024px 이하일 때 이 코드가 실행됨. 아이패드 또는 비교적 작은 해상도의 랩탑이나 데스크톱에 대응하는 코드를 작성한다.
+    ```css
+    @media all and (min-width:768px) and (max-width:1024px) {
+    }
+    ```
+    - Desktop Device : 사용자 해상도가 1025px 이상일 때 이 코드가 실행됨. 1024px 이상의 랩탑 또는 데스크톱에 대응하는 코드를 작성한다.
+    ```css
+    @media all and (min-width:1025px) {
+    }
+    ```
 
 ## **Parallax Scroling Website**
 <img src="https://user-images.githubusercontent.com/96935557/195273276-b7e3bad9-49f9-4a77-88bf-d6a99e6549c4.gif">
 
-- gsap 라이브러리
+- GSAP 라이브러리 (The GreenSock Animation Platform)
+```js
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"><script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
+```
+  - CSS와 바닐라 자바스크립트만으로도 동적인 화면을 만들 수 있지만, GSAP은 세밀한 움직임과 동작의 연속성을 훨씬 간편하게 설정
+  - `gsap.from(ele, option)` : 어디서부터 element를 option을 통해 이동시킬 것인가 하는 메서드이다. 
+  - `option : scrolltrigger` : 스크롤 이벤트 발생시, 지정한 축으로 자연스러운(scrub) 이동이 가능하게 한다.
 
 ## **Animated Navigation Bar**
 <img src="https://user-images.githubusercontent.com/96935557/195271101-c7dd1d64-3700-43d4-8c14-2bc2444a2b78.gif">
